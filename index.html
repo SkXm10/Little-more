@@ -4,10 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hey Monkey</title>
+    <title>For My Monkey</title>
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Poppins:wght@400;500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Poppins:wght@300;400;500;600&display=swap');
+
+        :root {
+            --midnight-deep: #0f0a2e;
+            --midnight-mid: #24184f;
+            --midnight-glow: #4a2f7a;
+            --blush: #ffb3c6;
+            --blush-soft: #ffd9e3;
+            --rosegold: #e8b8a0;
+            --starlight: #f6ecff;
+            --ink: #cfc4e8;
+        }
 
         * {
             box-sizing: border-box;
@@ -15,7 +26,7 @@
 
         body {
             font-family: 'Poppins', Arial, sans-serif;
-            background: linear-gradient(160deg, #fffaeb 0%, #fff2c6 45%, #ffe49a 100%);
+            background: radial-gradient(ellipse at top, var(--midnight-glow) 0%, var(--midnight-mid) 45%, var(--midnight-deep) 100%);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -26,17 +37,51 @@
             position: relative;
         }
 
+        /* Ambient starfield */
+        .stars {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background-image:
+                radial-gradient(1.5px 1.5px at 20% 30%, rgba(255, 255, 255, 0.9), transparent),
+                radial-gradient(1px 1px at 65% 15%, rgba(255, 255, 255, 0.7), transparent),
+                radial-gradient(2px 2px at 85% 60%, rgba(255, 255, 255, 0.8), transparent),
+                radial-gradient(1px 1px at 40% 80%, rgba(255, 255, 255, 0.6), transparent),
+                radial-gradient(1.5px 1.5px at 10% 65%, rgba(255, 255, 255, 0.7), transparent),
+                radial-gradient(1px 1px at 92% 25%, rgba(255, 255, 255, 0.6), transparent),
+                radial-gradient(1.5px 1.5px at 55% 50%, rgba(255, 255, 255, 0.5), transparent),
+                radial-gradient(1px 1px at 30% 10%, rgba(255, 255, 255, 0.6), transparent);
+            background-size: 100% 100%;
+            animation: twinkle 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% {
+                opacity: 0.5;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
         .particle {
             position: fixed;
             pointer-events: none;
             z-index: 1;
             top: -10px;
             animation: fall linear infinite;
+            filter: drop-shadow(0 0 6px rgba(255, 179, 198, 0.6));
         }
 
         @keyframes fall {
             0% {
                 transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
                 opacity: 1;
             }
 
@@ -47,20 +92,20 @@
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            padding: 40px 34px;
-            border-radius: 28px;
-            box-shadow: 0 20px 45px rgba(198, 140, 10, 0.18);
+            background: rgba(24, 15, 56, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 44px 36px;
+            border-radius: 26px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.06);
             text-align: center;
             max-width: 480px;
             width: 100%;
             display: none;
             position: relative;
             z-index: 10;
-            border: 2px solid #ffe49a;
-            animation: fadeIn 0.8s ease-in-out;
+            border: 1px solid rgba(255, 179, 198, 0.25);
+            animation: fadeIn 0.9s ease-in-out;
         }
 
         .card.active {
@@ -70,7 +115,7 @@
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(24px);
             }
 
             to {
@@ -80,54 +125,63 @@
         }
 
         .main-title {
-            font-family: 'Baloo 2', cursive;
-            font-weight: 800;
-            font-size: 40px;
-            color: #a85d1c;
-            margin: 5px 0 12px;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 700;
+            font-size: 42px;
+            background: linear-gradient(135deg, var(--starlight), var(--blush) 60%, var(--rosegold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 6px 0 14px;
+            letter-spacing: 0.3px;
         }
 
         h3 {
-            font-family: 'Baloo 2', cursive;
+            font-family: 'Cormorant Garamond', serif;
             font-weight: 700;
-            font-size: 24px;
-            color: #a85d1c;
+            font-size: 26px;
+            color: var(--blush-soft);
             margin-top: 0;
+            letter-spacing: 0.3px;
         }
 
         p {
-            color: #6b5a3f;
-            line-height: 1.7;
+            color: var(--ink);
+            line-height: 1.8;
             font-size: 15px;
+            font-weight: 300;
         }
 
         .emoji-row {
-            font-size: 42px;
-            margin-bottom: 8px;
+            font-size: 38px;
+            margin-bottom: 6px;
+            filter: drop-shadow(0 0 10px rgba(255, 179, 198, 0.35));
         }
 
         button {
             padding: 15px 28px;
-            font-size: 16px;
-            font-family: 'Baloo 2', sans-serif;
+            font-size: 15.5px;
+            font-family: 'Cormorant Garamond', serif;
             font-weight: 600;
+            letter-spacing: 0.4px;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: all 0.3s ease;
             width: 100%;
-            box-shadow: 0 10px 20px rgba(255, 184, 28, 0.35);
+            box-shadow: 0 12px 24px rgba(255, 143, 171, 0.25);
         }
 
         .primary-btn {
-            background: linear-gradient(135deg, #ffc93c, #ff9f1c);
-            color: #5c3a05;
-            margin-top: 22px;
+            background: linear-gradient(135deg, var(--blush), var(--rosegold));
+            color: #3a1530;
+            margin-top: 24px;
         }
 
         .primary-btn:hover {
             transform: translateY(-3px) scale(1.01);
-            box-shadow: 0 15px 25px rgba(255, 159, 28, 0.45);
+            box-shadow: 0 18px 30px rgba(255, 143, 171, 0.4);
         }
 
         .primary-btn:active {
@@ -136,36 +190,36 @@
 
         .tabs {
             display: flex;
-            gap: 12px;
-            margin: 22px 0 18px;
+            gap: 8px;
+            margin: 24px 0 18px;
         }
 
         .tab-link {
-            background: #fff6dd;
-            color: #a85d1c;
+            background: rgba(255, 217, 227, 0.08);
+            color: var(--blush-soft);
             flex: 1;
             border-radius: 12px;
-            padding: 12px;
-            font-size: 13.5px;
+            padding: 10px 6px;
+            font-size: 12.5px;
             box-shadow: none;
-            border: 1px solid #ffe49a;
+            border: 1px solid rgba(255, 179, 198, 0.3);
             width: auto;
         }
 
         .tab-link.active {
-            background: linear-gradient(135deg, #ffc93c, #ff9f1c);
-            color: #5c3a05;
+            background: linear-gradient(135deg, var(--blush), var(--rosegold));
+            color: #3a1530;
             border: none;
-            box-shadow: 0 5px 15px rgba(255, 159, 28, 0.3);
+            box-shadow: 0 6px 16px rgba(255, 143, 171, 0.3);
         }
 
         .tab-content {
             display: none;
             text-align: left;
-            background: rgba(255, 250, 232, 0.8);
+            background: rgba(255, 217, 227, 0.05);
             padding: 22px;
             border-radius: 16px;
-            border-left: 4px solid #ff9f1c;
+            border-left: 3px solid var(--blush);
         }
 
         .tab-content.default-tab {
@@ -173,20 +227,20 @@
         }
 
         .countdown-container {
-            background: rgba(255, 235, 179, 0.55);
-            border: 2px dashed #ffc93c;
-            padding: 20px;
+            background: rgba(255, 179, 198, 0.07);
+            border: 1.5px dashed rgba(255, 179, 198, 0.4);
+            padding: 22px;
             border-radius: 18px;
-            margin: 22px 0;
+            margin: 24px 0;
         }
 
         .countdown-container p.label {
-            font-size: 12.5px;
+            font-size: 12px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #a85d1c;
-            margin: 0 0 10px 0;
-            font-weight: 600;
+            letter-spacing: 1.5px;
+            color: var(--blush-soft);
+            margin: 0 0 12px 0;
+            font-weight: 500;
         }
 
         .timer-grid {
@@ -196,35 +250,35 @@
         }
 
         .timer-unit {
-            background: #fff;
+            background: rgba(15, 10, 46, 0.6);
             border-radius: 12px;
-            padding: 8px 12px;
+            padding: 10px 12px;
             min-width: 56px;
-            box-shadow: 0 4px 10px rgba(198, 140, 10, 0.15);
+            border: 1px solid rgba(255, 179, 198, 0.2);
         }
 
         .timer-unit .num {
-            font-family: 'Baloo 2', cursive;
+            font-family: 'Playfair Display', serif;
             font-weight: 700;
             font-size: 22px;
-            color: #ff9f1c;
+            color: var(--blush);
             display: block;
         }
 
         .timer-unit .unit-label {
             font-size: 10px;
-            color: #a8895a;
+            color: var(--ink);
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
         .places-box {
-            background: rgba(255, 250, 232, 0.9);
+            background: rgba(255, 217, 227, 0.05);
             border-radius: 16px;
             padding: 22px;
             text-align: left;
-            border: 1px solid #ffe49a;
-            margin-top: 18px;
+            border: 1px solid rgba(255, 179, 198, 0.2);
+            margin-top: 20px;
         }
 
         .place-item {
@@ -240,9 +294,10 @@
             height: 130px;
             object-fit: cover;
             border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(198, 140, 10, 0.2);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
             margin-bottom: 8px;
             display: block;
+            filter: saturate(1.05) brightness(0.97);
         }
 
         .place-caption {
@@ -257,56 +312,82 @@
         }
 
         .place-item strong {
-            color: #a85d1c;
+            color: var(--blush-soft);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 16px;
         }
 
         .closing-note {
-            margin-top: 24px;
-            font-weight: 500;
-            color: #6b5a3f;
-            font-size: 15px;
+            margin-top: 26px;
+            font-weight: 400;
+            font-style: italic;
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--blush-soft);
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .signature {
+            margin-top: 14px;
+            font-size: 12.5px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: rgba(207, 196, 232, 0.6);
         }
     </style>
 </head>
 
 <body>
+    <div class="stars"></div>
 
     <div id="screen1" class="card active">
-        <div class="emoji-row">🐒🍌</div>
-        <h2 class="main-title">Hey Monkey</h2>
-        <p>Just a little something to keep you updated while we count down the days.</p>
-        <button class="primary-btn" onclick="nextScreen()">Get to know me a bit more</button>
+        <div class="emoji-row">🌙✨</div>
+        <h2 class="main-title">For My Monkey</h2>
+        <p>I hope you know you're the last thought before I fall asleep 😴💭 and the first one when I wake up 🌤️.
+            This is just a little something to hold you over until the distance closes 🤏➡️🫶.</p>
+        <button class="primary-btn" onclick="nextScreen()">Get to know me a little more 👀</button>
     </div>
 
     <div id="screen2" class="card">
         <h2 class="main-title">Getting to Know Me</h2>
-        <p>You said you wanted to know my character in person — here's a small preview until then.</p>
+        <p>I wanted you to know me in person 🥰 — and you will, soon. Until then, here's a small preview of the
+            life you're about to fall into. I promise it gets so much better with you in it 💫.</p>
 
         <div class="tabs">
-            <button class="tab-link active" onclick="openTab(event, 'life')">My Life in Japan</button>
-            <button class="tab-link" onclick="openTab(event, 'hobbies')">My Hobbies</button>
+            <button class="tab-link active" onclick="openTab(event, 'life')">🗼 My Life</button>
+            <button class="tab-link" onclick="openTab(event, 'hobbies')">🎮 My Hobbies</button>
+            <button class="tab-link" onclick="openTab(event, 'meme')">🐒 Thoughts</button>
         </div>
 
         <div id="life" class="tab-content default-tab">
-            <h3>Tokyo Days</h3>
-            <p>Right now I'm living in Tokyo, studying at an IT college. Most days are a mix of classes, assignments,
-                and figuring things out on my own. It's busy, but I like it here — and honestly, I keep thinking about
-                how much better it'll be once you're around too.</p>
+            <h3>Tokyo Days 🏙️</h3>
+            <p>Right now I'm living in Tokyo, studying at an IT college 🎓. Most days are a mix of classes,
+                assignments, and figuring things out on my own 😅 under city lights that never really go dark 🌃.
+                It's busy, but I like it here — though every skyline I look at, I catch myself imagining you
+                standing next to me, seeing it for the first time 🥺✨.</p>
         </div>
 
         <div id="hobbies" class="tab-content">
-            <h3>What I Do for Fun</h3>
-            <p>When I'm not studying, I'm usually writing code — yes, I'm that kind of nerd — or playing games to
-                unwind. Nothing too wild, just the things that keep me sane between classes. I'd love to show you my
-                world a bit when you're here.</p>
+            <h3>What I Do for Fun 🎮</h3>
+            <p>When I'm not studying, I'm usually writing code 👨‍💻 — yes, I'm that kind of nerd 🤓 — or playing
+                games late into the night to unwind 🕹️. Nothing too wild, just the little things that keep me
+                sane between classes. I'd love for you to sit beside me one of these nights, even if all I'm
+                doing is staring at a screen — your company would make it feel like something worth remembering 💕.</p>
         </div>
 
-        <button class="primary-btn" onclick="finalScreen()">See what's next 🍌</button>
+        <div id="meme" class="tab-content">
+            <h3>Say Something Silly 🐒💬</h3>
+            <p id="memeText">Tap the button and let's see what nonsense comes out 😂</p>
+            <button class="primary-btn" style="margin-top:14px;" onclick="randomThought()">🎲 Give me a random
+                thought</button>
+        </div>
+
+        <button class="primary-btn" onclick="finalScreen()">See what's next 🌙</button>
     </div>
 
     <div id="screen3" class="card">
-        <div class="emoji-row">🐒</div>
-        <h2 class="main-title">Can't Wait</h2>
+        <div class="emoji-row">🌌</div>
+        <h2 class="main-title">Can't Wait For You</h2>
 
         <div class="countdown-container">
             <p class="label">Roughly counting down to Dec / Jan</p>
@@ -320,7 +401,8 @@
             </div>
         </div>
 
-        <p>No exact date yet, but every second just feels like one moment closer to seeing you.</p>
+        <p>No exact date yet, but every second still counts down to something real ⏳ — the moment I get to hold
+            you properly instead of just missing you from a screen away 📵➡️🫂.</p>
 
         <div class="places-box">
             <div class="place-item">
@@ -328,7 +410,7 @@
                     src="https://images.unsplash.com/photo-1610026386855-e01404c45a63?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                     alt="Deer at Todaiji Temple, Nara" onerror="this.style.display='none'">
                 <div class="place-caption"><span class="place-emoji">🦌</span>
-                    <p><strong>Nara</strong> — to see the deer and the old temples</p>
+                    <p><strong>Nara</strong> — to feed the deer and wander the old temples, hand in hand 🤝</p>
                 </div>
             </div>
             <div class="place-item">
@@ -336,14 +418,15 @@
                     src="https://cdn.cheapoguides.com/wp-content/uploads/sites/3/2022/09/akashi-kaikyo-bridge-awaji_sean-pavone_iStock-1050702486-1024x600.jpg"
                     alt="Ohama Coast, Awaji Island" onerror="this.style.display='none'">
                 <div class="place-caption"><span class="place-emoji">🌉</span>
-                    <p><strong>Awaji Island</strong> — for a slower, scenic day together</p>
+                    <p><strong>Awaji Island</strong> — a slow, quiet day where it's just the two of us 🥂</p>
                 </div>
             </div>
             <div class="place-item">
                 <img class="place-photo" src="https://www.japan-guide.com/g18/6918_01.jpg"
                     alt="Fuji-Q Highland with Mount Fuji view" onerror="this.style.display='none'">
                 <div class="place-caption"><span class="place-emoji">🎢</span>
-                    <p><strong>Fuji-Q Highland</strong> — if you're up for some rollercoasters</p>
+                    <p><strong>Fuji-Q Highland</strong> — if you're brave enough, I'll hold your hand the whole ride
+                        😱🤝</p>
                 </div>
             </div>
             <div class="place-item">
@@ -351,12 +434,16 @@
                     src="https://yentravelsjapan.com/wp-content/uploads/2025/02/Compress_20250223_035617_7136-1140x855.jpg"
                     alt="Sunset at Egawa Beach, Japan" onerror="this.style.display='none'">
                 <div class="place-caption"><span class="place-emoji">🌅</span>
-                    <p><strong>A beach at sunset</strong> — the kind where the sky looks unreal</p>
+                    <p><strong>A beach at sunset</strong> — the kind where the sky looks unreal, and I want you
+                        right there next to me watching it turn gold 🧡</p>
                 </div>
             </div>
         </div>
 
-        <p class="closing-note">I want to see all of it with you, not just show you around. Talk soon, Monkey. 🐒🍌</p>
+        <p class="closing-note">"Distance means so little when someone means so much." 🌍❤️ I want to see all of
+            it with you, not just show you around — every street, every sunset, every ordinary Tuesday 🫶. Talk
+            soon, my Monkey. 🌙🍌🤍</p>
+        <p class="signature">— always thinking of you 💭</p>
     </div>
 
     <script>
@@ -383,6 +470,30 @@
             evt.currentTarget.classList.add("active");
         }
 
+        const sillyThoughts = [
+            "POV: I'm pretending to focus on code but really just thinking about you 👀💻",
+            "Scientifically proven: missing you burns more calories than a workout 🏋️‍♀️❤️",
+            "Breaking news: local monkey caught smiling at her phone for no reason again 🐒📱",
+            "My love language is sending 'good morning' before I've even opened both eyes 🌅💌",
+            "If overthinking about you was an Olympic sport, I'd already have the gold 🥇😅",
+            "Currently running on 73% caffeine and 27% thinking about your laugh ☕😆",
+            "Warning: this monkey has not stopped smiling since your last text 🐒📩",
+            "I did the math — the distance is temporary, my crush on you is permanent 🧮❤️",
+            "Plot twist: I was never good at waiting, until I had a reason to wait for you ⏳🍌",
+            "Me: focuses on class. Also me: thinking about what we'll do when you're finally here 🎒💭"
+        ];
+
+        function randomThought() {
+            const el = document.getElementById('memeText');
+            let next = sillyThoughts[Math.floor(Math.random() * sillyThoughts.length)];
+            if (sillyThoughts.length > 1) {
+                while (next === el.textContent) {
+                    next = sillyThoughts[Math.floor(Math.random() * sillyThoughts.length)];
+                }
+            }
+            el.textContent = next;
+        }
+
         // Estimated arrival window: using Dec 1 as a soft target for the countdown
         const arrivalDate = new Date("2026-12-01T00:00:00").getTime();
 
@@ -391,7 +502,7 @@
             const difference = arrivalDate - now;
 
             if (difference < 0) {
-                document.getElementById("timer").innerHTML = "Any moment now, Monkey 🐒🍌";
+                document.getElementById("timer").innerHTML = "Any moment now, my love 🌙";
                 return;
             }
 
@@ -409,7 +520,7 @@
         updateCountdown();
         setInterval(updateCountdown, 1000);
 
-        const particles = ['🐒', '🍌', '✨', '🍁'];
+        const particles = ['✨', '🌙', '💫', '🤍'];
         function createParticle() {
             const particleEl = document.createElement('div');
             particleEl.classList.add('particle');
@@ -421,7 +532,7 @@
 
             setTimeout(() => { particleEl.remove(); }, 7000);
         }
-        setInterval(createParticle, 350);
+        setInterval(createParticle, 450);
     </script>
 
 </body>
